@@ -1,4 +1,4 @@
-FROM jonoh/raspberry-pi-os:2021.3.4
+FROM jonoh/raspberry-pi-os:2021.5.7
 
 # SSH
 RUN SSH_DIR=/home/pi/.ssh && \
