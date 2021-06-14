@@ -11,6 +11,7 @@ RUN SSH_DIR=/home/pi/.ssh && \
     systemctl enable ssh
 
 # WiFi
-RUN apt-get purge -y rfkill && \
-    rm /etc/wpa_supplicant/wpa_supplicant.conf || true && \
-    ln -s /data/wifi/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
+COPY wifi-unkill.service /etc/systemd/system/
+RUN rm /etc/wpa_supplicant/wpa_supplicant.conf || true && \
+    ln -s /data/wifi/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf && \
+    systemctl enable wifi-unkill.service

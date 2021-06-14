@@ -1,0 +1,13 @@
+[Unit]
+Description=Unkill wifi if wpa_supplicant.conf supplied
+ConditionPathExists=/data/wifi/wpa_supplicant.conf
+Before=dhcpcd.service
+After=systemd-rfkill.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/rfkill unblock wifi
+
+[Install]
+WantedBy=multi-user.target
