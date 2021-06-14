@@ -3,7 +3,7 @@ FROM jonoh/raspberry-pi-os:2021.5.7
 # SSH
 RUN SSH_DIR=/home/pi/.ssh && \
     SSH_CONF=/etc/ssh/sshd_config && \
-    mkdir -p "${SSH_DIR}" && \
+    mkdir -p "${SSH_DIR}" && chown pi:pi "${SSH_DIR}" &&  \
     ln -s /data/ssh/authorized_keys "${SSH_DIR}/authorized_keys" && \
     sed -i -r 's/#? *PasswordAuthentication +(yes|no)/PasswordAuthentication no/' ${SSH_CONF} && \
     sed -i -r 's/#? *ChallengeResponseAuthentication +(yes|no)/ChallengeResponseAuthentication no/' ${SSH_CONF} && \
