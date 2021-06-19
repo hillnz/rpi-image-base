@@ -1,5 +1,10 @@
 FROM jonoh/raspberry-pi-os:2021.5.7
 
+# First boot partition expansion
+COPY first_boot /first_boot
+RUN apt-get update && apt-get install -y python3-parted && \
+    sed -r -i 's! init=[^ ]+( |$)! init=/first_boot/first_boot.sh !' /boot/cmdline.txt
+
 # SSH
 RUN SSH_DIR=/home/pi/.ssh && \
     SSH_CONF=/etc/ssh/sshd_config && \
